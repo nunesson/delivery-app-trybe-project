@@ -14,7 +14,7 @@ const sales = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       totalPrice: {
-        type: DataTypes.DECIMAL(9,2),
+        type: DataTypes.DECIMAL(9, 2),
       },
       deliveryAddress: {
         type: DataTypes.STRING(100),
@@ -34,8 +34,13 @@ const sales = (sequelize, DataTypes) => {
       underscored: true,
       timestamps: false,
     },
-);
-    
+  );
+
+  sales.associate = (models) => {
+    sales.belongsTo(models.users, { foreignKey: 'userId' });
+    sales.belongsTo(models.users, { foreignKey: 'sellerId' });
+  };
+
   return sales;
 };
 
