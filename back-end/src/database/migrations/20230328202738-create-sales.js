@@ -9,24 +9,31 @@ module.exports = {
       },
       userId: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       sellerId: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       totalPrice: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       deliveryAddress: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       deliveryNumber: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       saleDate: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       status: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
     });
   },

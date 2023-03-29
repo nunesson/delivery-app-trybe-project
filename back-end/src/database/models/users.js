@@ -10,20 +10,20 @@ const users = (sequelize, DataTypes) => {
       },
       name: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100)
       },
       email: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         unique: true,
       },
       password: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(32)
       },
       role: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(20)
       },
     },
     {

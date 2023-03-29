@@ -8,14 +8,16 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
+      },
+      price: {
+        type: Sequelize.DECIMAL(4,2),
+        allowNull: false,
       },
       urlImage: {
-        type: Sequelize.STRING,
-        field: 'url_image',
-      },
-      quantity: {
-        type: Sequelize.NUMBER,
+        allowNull: false,
+        type: Sequelize.STRING(200),
+        defaultValue: '',
       },
     });
   },
