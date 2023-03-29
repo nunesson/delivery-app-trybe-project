@@ -10,20 +10,23 @@ const products = (sequelize, DataTypes) => {
         },
         name: {
           allowNull: false,
-          type: DataTypes.STRING
+          type: DataTypes.STRING(100),
+          unique: true,
         },
         price: {
           allowNull: false,
-          type: DataTypes.STRING,
+          type: DataTypes.DECIMAL(4,2),
           unique: true,
         },
         urlImage: {
           allowNull: false,
-          type: DataTypes.TEXT,
+          type: DataTypes.STRING(200),
+          defaultValue: '',
         },
     },
     {
-        tableName: 'salesProducts',
+
+        tableName: 'products',
         underscored: true,
         timestamps: false,
       });

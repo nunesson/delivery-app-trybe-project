@@ -8,13 +8,16 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       saleId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       productId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       quantity: {
         type: Sequelize.NUMBER,
+        allowNull: false,
       },
       
     });

@@ -8,35 +8,35 @@ const sales = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       userId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       },
       sellerId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       },
       totalPrice: {
-        type: DataTypes.STRING,
+        type: DataTypes.DECIMAL(9,2),
       },
       deliveryAddress: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
       },
       deliveryNumber: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50),
       },
       saleDate: {
-        type: DataTypes.STRING
+        type: DataTypes.DATE,
       },
       status: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50),
       },
     },
     {
       tableName: 'sales',
       underscored: true,
       timestamps: false,
-    });
+    },
+);
     
   return sales;
 };
-
 
 module.exports = sales;
