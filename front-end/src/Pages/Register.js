@@ -4,7 +4,14 @@ import Context from '../Context/myContext';
 import { genericPost } from '../Axios/Register';
 
 function Register() {
-  const { setNewUser, setStateBtn, newUser, stateBtn } = useContext(Context);
+  const {
+    setNewUser,
+    setStateBtn,
+    newUser,
+    stateBtn,
+    errorStatus,
+    setErrorStatus } = useContext(Context);
+
   const history = useHistory();
 
   const verifyValues = () => {
@@ -27,7 +34,9 @@ function Register() {
 
   const handleButton = async () => {
     const statusHTTP = 201;
+    const statusHTTPConflict = 409;
     const { data, status } = await genericPost('register', newUser);
+    if (status === statusHTTPConflict) return setErrorStatus(true);
     if (status === statusHTTP && data.role === 'customer') {
       history.push('/customer/products');
     }
@@ -79,11 +88,14 @@ function Register() {
       >
         Cadastre-se
       </button>
-      <h3
-        data-testid="common_register__element-invalid_register"
-      >
-        Tá errado isso aí
-      </h3>
+      {errorStatus
+        && (
+          <h3
+            data-testid="common_register__element-invalid_register"
+          >
+            Tá errado isso aí
+          </h3>
+        )}
     </>
   );
 }
