@@ -24,10 +24,15 @@ function Login() {
     setState({
       ...state,
       [name]: value,
-
     });
   };
+
+  const onClickBtn = () => {
+    window.location.replace('http://localhost:3000/register');
+  };
+
   useEffect(() => verifyValues());
+
   return (
     <>
       <h1>Bar da Dona Tereza</h1>
@@ -64,6 +69,7 @@ function Login() {
       <button
         data-testid="common_login__button-register"
         type="button"
+        onClick={ onClickBtn }
       >
         Cadastre-se
       </button>
