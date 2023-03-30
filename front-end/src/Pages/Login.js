@@ -9,6 +9,7 @@ function Login() {
 
   const [state, setState] = useState(initialState);
   const [stateBtn, setStateBtn] = useState(true);
+
   const verifyValues = () => {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     const number = 5;
@@ -25,9 +26,9 @@ function Login() {
     setState({
       ...state,
       [name]: value,
-
     });
   };
+
 
   const [errorState, setErrorState] = useState(false);
 
@@ -37,6 +38,9 @@ function Login() {
         setErrorState(true);
         console.error(error.message);
       });
+
+  const onClickBtn = () => {
+    window.location.replace('http://localhost:3000/register');
   };
 
   useEffect(() => verifyValues());
@@ -78,6 +82,7 @@ function Login() {
       <button
         data-testid="common_login__button-register"
         type="button"
+        onClick={ onClickBtn }
       >
         Cadastre-se
       </button>
