@@ -35,7 +35,7 @@ function Register() {
       </label>
       <br />
       <button
-        data-testid="common_register__input-register"
+        data-testid="common_register__button-register"
         type="button"
       >
         Cadastre-se
