@@ -2,7 +2,6 @@ const cors = require('cors');
 const express = require('express');
 const { error } = require('./Middlewares/Error');
 const routers = require('./Router/Router');
-const cors = require('cors');
 const { aproveUsers } = require('../database/controller/login.controller');
 
 const app = express();
