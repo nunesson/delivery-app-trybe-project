@@ -1,7 +1,13 @@
+const cors = require('cors');
 const express = require('express');
+const { error } = require('./Middlewares/Error');
+const routers = require('./Router/Router');
 
 const app = express();
+app.use(express.json());
+ app.use(cors());
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+app.use(routers);
+app.use(error);
 
 module.exports = app;
