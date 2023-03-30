@@ -1,6 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Register() {
+  const initialState = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
+  const [state, setState] = useState(initialState);
+  const [stateBtn, setStateBtn] = useState(true);
+
+  const verifyValues = () => {
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const nameMin = 11;
+    const numberMin = 5;
+    const validateEmail = state.email.match(emailRegex);
+    const validatePassword = state.password.length > numberMin;
+    const validateName = state.name.length > nameMin;
+    if (validateEmail && validatePassword && validateName) return setStateBtn(false);
+    return setStateBtn(true);
+  };
+
+  const onChangeForms = ({ target: { value, name } }) => {
+    setState({
+      ...state,
+      [name]: value,
+    });
+  };
+
+  useEffect(() => verifyValues());
+
   return (
     <>
       <h1>Cadastro</h1>
@@ -11,6 +40,7 @@ function Register() {
           type="text"
           name="name"
           placeholder="Digite seu nome"
+          onChange={ onChangeForms }
         />
       </label>
       <br />
@@ -21,6 +51,7 @@ function Register() {
           type="email"
           name="email"
           placeholder="Digite seu email"
+          onChange={ onChangeForms }
         />
       </label>
       <br />
@@ -31,12 +62,14 @@ function Register() {
           type="password"
           name="password"
           placeholder="Digite sua senha"
+          onChange={ onChangeForms }
         />
       </label>
       <br />
       <button
         data-testid="common_register__button-register"
         type="button"
+        disabled={ stateBtn }
       >
         Cadastre-se
       </button>
