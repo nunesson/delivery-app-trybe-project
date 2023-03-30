@@ -28,6 +28,7 @@ function Login() {
     });
   };
   useEffect(() => verifyValues());
+
   return (
     <>
       <h1>Bar da Dona Tereza</h1>
