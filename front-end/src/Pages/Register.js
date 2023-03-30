@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-function Login() {
+function Register() {
   const initialState = {
+    name: '',
     email: '',
     password: '',
   };
@@ -11,71 +12,69 @@ function Login() {
 
   const verifyValues = () => {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-    const number = 5;
+    const nameMin = 11;
+    const numberMin = 5;
     const validateEmail = state.email.match(emailRegex);
-    const validatePassword = state.password.length > number;
-    console.log(state);
-    if (validateEmail && validatePassword) {
-      return setStateBtn(false);
-    }
+    const validatePassword = state.password.length > numberMin;
+    const validateName = state.name.length > nameMin;
+    if (validateEmail && validatePassword && validateName) return setStateBtn(false);
     return setStateBtn(true);
   };
 
-  const onChange = ({ target: { value, name } }) => {
+  const onChangeForms = ({ target: { value, name } }) => {
     setState({
       ...state,
       [name]: value,
     });
   };
 
-  const onClickBtn = () => {
-    window.location.replace('http://localhost:3000/register');
-  };
-
   useEffect(() => verifyValues());
 
   return (
     <>
-      <h1>Bar da Dona Tereza</h1>
+      <h1>Cadastro</h1>
+      <label htmlFor="name">
+        Nome:
+        <input
+          data-testid="common_register__input-name"
+          type="text"
+          name="name"
+          placeholder="Digite seu nome"
+          onChange={ onChangeForms }
+        />
+      </label>
+      <br />
       <label htmlFor="email">
         E-mail:
         <input
-          data-testid="common_login__input-email"
+          data-testid="common_register__input-email"
           type="email"
           name="email"
           placeholder="Digite seu email"
-          onChange={ onChange }
+          onChange={ onChangeForms }
         />
       </label>
       <br />
       <label htmlFor="password">
         Senha:
         <input
-          data-testid="common_login__input-password"
+          data-testid="common_register__input-password"
           type="password"
           name="password"
           placeholder="Digite sua senha"
-          onChange={ onChange }
+          onChange={ onChangeForms }
         />
       </label>
       <br />
       <button
-        data-testid="common_login__button-login"
+        data-testid="common_register__button-register"
         type="button"
         disabled={ stateBtn }
-      >
-        Login
-      </button>
-      <br />
-      <button
-        data-testid="common_login__button-register"
-        type="button"
-        onClick={ onClickBtn }
       >
         Cadastre-se
       </button>
       <h3
-        data-testid="common_login__element-invalid-email "
+        data-testid="common_register__element-invalid_register"
       >
         Tá errado isso aí
       </h3>
@@ -83,4 +82,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
