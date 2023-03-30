@@ -29,7 +29,6 @@ function Login() {
     });
   };
 
-
   const [errorState, setErrorState] = useState(false);
 
   const onClick = () => {
@@ -38,6 +37,7 @@ function Login() {
         setErrorState(true);
         console.error(error.message);
       });
+  };
 
   const onClickBtn = () => {
     window.location.replace('http://localhost:3000/register');
