@@ -21,6 +21,7 @@ function Customer() {
       <NavBar />
       {products.map((ele) => (
         <Cards
+          id={ ele.id }
           key={ ele.id }
           name={ ele.name }
           price={ ele.price }
