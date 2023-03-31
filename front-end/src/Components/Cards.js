@@ -14,7 +14,11 @@ export default function Cards({ name, price, urlImage, id }) {
         <h2 data-testid={ `customer_products__element-card-title-${id}` }>
           {name}
         </h2>
-        <h3 data-testid={ `customer_products__element-card-price-${id}` }>{price}</h3>
+        <h3
+          data-testid={ `customer_products__element-card-price-${id}` }
+        >
+          {price.replace('.', ',')}
+        </h3>
         <button
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }
@@ -22,6 +26,7 @@ export default function Cards({ name, price, urlImage, id }) {
           +
         </button>
         <input
+          value="0"
           type="number"
           name="quantity"
           data-testid={ `customer_products__input-card-quantity-${id}` }
