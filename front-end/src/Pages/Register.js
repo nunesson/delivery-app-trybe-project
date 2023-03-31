@@ -35,7 +35,7 @@ function Register() {
   const handleButton = async () => {
     const statusHTTP = 201;
     const statusHTTPConflict = 409;
-    const { data, status } = await genericRoutes('register', newUser, 'post');
+    const { data, status } = await genericRoutes('register', 'post', newUser);
     if (status === statusHTTPConflict) return setErrorStatus(true);
     if (status === statusHTTP && data.role === 'customer') {
       history.push('/customer/products');
