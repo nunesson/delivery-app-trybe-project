@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 function Login() {
   const initialState = {
@@ -25,6 +27,20 @@ function Login() {
     setState({
       ...state,
       [name]: value,
+    });
+  };
+
+  const [errorState, setErrorState] = useState(false);
+
+  const [redirectState, setredirectState] = useState(false);
+
+  const onClick = () => {
+    const statusHTTP = 200;
+    axios.post('http://localhost:3001/login', { ...state }).then((res) => {
+      if (res.status === statusHTTP) setredirectState(true);
+    }).catch((error) => {
+      setErrorState(true);
+      console.error(error.message);
     });
   };
 
@@ -63,6 +79,7 @@ function Login() {
         data-testid="common_login__button-login"
         type="button"
         disabled={ stateBtn }
+        onClick={ onClick }
       >
         Login
       </button>
@@ -74,11 +91,13 @@ function Login() {
       >
         Cadastre-se
       </button>
-      <h3
-        data-testid="common_login__element-invalid-email "
-      >
-        Tá errado isso aí
-      </h3>
+      { errorState && (
+        <h3
+          data-testid="common_login__element-invalid-email"
+        >
+          Tá errado isso aí
+        </h3>)}
+      { redirectState && <Redirect to="/customer/products" /> }
     </>
   );
 }

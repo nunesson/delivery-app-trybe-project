@@ -21,10 +21,10 @@ const salesProducts = (sequelize, DataTypes) => {
 			timestamps: false,
 		});
 
-	salesProducts.associate = (models) => {
-		salesProducts.belongsToMany(models.sales, { foreignKey: 'saleId' });
-		salesProducts.belongsToMany(models.products, { foreignKey: 'productId' });
-	};
+	// salesProducts.associate = (models) => {
+	// 	salesProducts.belongsToMany(models.sales, { foreignKey: 'saleId' });
+	// 	salesProducts.belongsToMany(models.products, { foreignKey: 'productId' });
+	// };
 
 	return salesProducts;
 };
