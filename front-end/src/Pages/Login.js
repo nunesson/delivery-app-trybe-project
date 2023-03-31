@@ -34,7 +34,7 @@ function Login() {
 
   const [redirectState, setredirectState] = useState(false);
 
-  const onClick = () => {
+  const onClickLogin = () => {
     const statusHTTP = 200;
     axios.post('http://localhost:3001/login', { ...state }).then((res) => {
       if (res.status === statusHTTP) setredirectState(true);
@@ -44,7 +44,7 @@ function Login() {
     });
   };
 
-  const onClickBtn = () => {
+  const onClickRegister = () => {
     window.location.replace('http://localhost:3000/register');
   };
 
@@ -79,7 +79,7 @@ function Login() {
         data-testid="common_login__button-login"
         type="button"
         disabled={ stateBtn }
-        onClick={ onClick }
+        onClick={ onClickLogin }
       >
         Login
       </button>
@@ -87,7 +87,7 @@ function Login() {
       <button
         data-testid="common_login__button-register"
         type="button"
-        onClick={ onClickBtn }
+        onClick={ onClickRegister }
       >
         Cadastre-se
       </button>
