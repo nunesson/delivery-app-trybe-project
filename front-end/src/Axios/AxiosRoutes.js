@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const genericRoutes = async (route, data, type) => {
+const genericRoutes = async (route, type, data) => {
   switch (type) {
   case 'post':
     try {

@@ -51,7 +51,7 @@ function Login() {
   useEffect(() => verifyValues());
 
   return (
-    <>
+    <div className="login">
       <h1>Bar da Dona Tereza</h1>
       <label htmlFor="email">
         E-mail:
@@ -98,7 +98,7 @@ function Login() {
           Tá errado isso aí
         </h3>)}
       { redirectState && <Redirect to="/customer/products" /> }
-    </>
+    </div>
   );
 }
 

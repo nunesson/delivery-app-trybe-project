@@ -11,10 +11,20 @@ function Provider({ children }) {
   });
   const [stateBtn, setStateBtn] = useState(true);
   const [errorStatus, setErrorStatus] = useState(false);
+  const [products, setProducts] = useState([]);
 
   const listData = useMemo(
-    () => ({ newUser, setNewUser, stateBtn, setStateBtn, errorStatus, setErrorStatus }),
-    [newUser, stateBtn, errorStatus],
+    () => ({
+      newUser,
+      setNewUser,
+      stateBtn,
+      setStateBtn,
+      errorStatus,
+      setErrorStatus,
+      products,
+      setProducts,
+    }),
+    [newUser, stateBtn, errorStatus, products],
   );
   return <Context.Provider value={ listData }>{children}</Context.Provider>;
 }
