@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Context from '../Context/myContext';
-import { genericPost } from '../Axios/Register';
+import { genericRoutes } from '../Axios/AxiosRoutes';
 
 function Register() {
   const {
@@ -35,7 +35,7 @@ function Register() {
   const handleButton = async () => {
     const statusHTTP = 201;
     const statusHTTPConflict = 409;
-    const { data, status } = await genericPost('register', newUser);
+    const { data, status } = await genericRoutes('register', newUser, 'post');
     if (status === statusHTTPConflict) return setErrorStatus(true);
     if (status === statusHTTP && data.role === 'customer') {
       history.push('/customer/products');
