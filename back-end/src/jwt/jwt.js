@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
-const TOKEN_SECRET = process.env.JWT_SECRET;
+const TOKEN_SECRET = fs.readFileSync('jwt.evaluation.key');
 
 const jwtConfig = {
-  expiresIn: '1d',
   algorithm: 'HS256',
 };
 
