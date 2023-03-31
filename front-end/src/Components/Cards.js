@@ -1,31 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import Context from '../Context/myContext';
 import { getLocalStorage } from '../LocalStorage/localStorage';
 import { emptyLocalStorage,
   filterLocalStorage } from '../LocalStorage/localStorageCarrinho';
 
 export default function Cards({ name, price, urlImage, id }) {
+  const { setTotalPrice } = useContext(Context);
+
   const [qtdState, setQtdState] = useState(0);
 
-  const incrementQtd = () => {
-    if (qtdState === null) {
-      return setQtdState(1);
+  const [firstTime, setFirstTime] = useState(false);
+
+  const getTotalPrice = () => {
+    const carrinho = getLocalStorage('carrinho');
+    if (carrinho) {
+      const total = carrinho.reduce((acc, cur) => +cur.subtotal + acc, 0);
+      setTotalPrice(total.toFixed(2));
     }
+  };
+
+  const product = {
+    id,
+    name,
+    price,
+    urlImage,
+    quantity: qtdState,
+    subtotal: +qtdState * +price,
+  };
+
+  const incrementQtd = () => {
     setQtdState(qtdState + 1);
-
-    const product = {
-      name,
-      price,
-      urlImage,
-      id,
-      quantity: qtdState,
-      subtotal: +price * qtdState,
-    };
-
-    const localStorage = getLocalStorage('carrinho');
-    if (localStorage === null) { return emptyLocalStorage(product); }
-
-    if (localStorage.length > 0) { return filterLocalStorage(product); }
   };
 
   const decrementQtd = () => {
@@ -33,21 +38,6 @@ export default function Cards({ name, price, urlImage, id }) {
       return setQtdState(0);
     }
     setQtdState(qtdState - 1);
-    const product = {
-      name,
-      price,
-      urlImage,
-      id,
-      quantity: qtdState,
-      subtotal: +price * qtdState,
-    };
-    const localStorage = getLocalStorage('carrinho');
-    if (localStorage === null) {
-      return emptyLocalStorage(product);
-    }
-    if (localStorage.length > 0) {
-      return filterLocalStorage(product);
-    }
   };
 
   const handleChangeQtd = ({ target: { value } }) => {
@@ -55,22 +45,25 @@ export default function Cards({ name, price, urlImage, id }) {
       return setQtdState(0);
     }
     setQtdState(+value);
-    const product = {
-      name,
-      price,
-      urlImage,
-      id,
-      quantity: qtdState,
-      subtotal: +price * qtdState,
-    };
-    const localStorage = getLocalStorage('carrinho');
-    if (localStorage === null) {
-      return emptyLocalStorage(product);
-    }
-    if (localStorage.length > 0) {
-      return filterLocalStorage(product);
-    }
   };
+
+  useEffect(() => {
+    if (firstTime) {
+      const localStorage = getLocalStorage('carrinho');
+      if (localStorage === null) { return emptyLocalStorage(product); }
+
+      if (localStorage.length > 0) { return filterLocalStorage(product); }
+    } else {
+      setFirstTime(true);
+    }
+  }, [qtdState]);
+
+  useEffect(
+    () => {
+      getTotalPrice();
+    },
+    [qtdState],
+  );
 
   return (
     <div>
