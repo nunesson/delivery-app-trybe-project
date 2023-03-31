@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { setLocalStorage } from '../LocalStorage/localStorage';
 
 function Login() {
   const initialState = {
@@ -38,6 +39,8 @@ function Login() {
     const statusHTTP = 200;
     axios.post('http://localhost:3001/login', { ...state }).then((res) => {
       if (res.status === statusHTTP) setredirectState(true);
+      const { name, email, role, token } = res.data;
+      setLocalStorage('user', { name, email, role, token });
     }).catch((error) => {
       setErrorState(true);
       console.error(error.message);
