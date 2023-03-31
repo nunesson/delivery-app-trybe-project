@@ -1,8 +1,10 @@
 import React from 'react';
+import NavBar from '../Components/NavBar';
 
 function Customer() {
   return (
-    <h1>Customer</h1>
+    <NavBar />
+
   );
 }
 
