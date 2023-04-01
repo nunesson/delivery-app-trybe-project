@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
+import Context from '../Context/myContext';
+import { getLocalStorage } from '../LocalStorage/localStorage';
 
 function CheckoutTable() {
+  const { totalPrice, setTotalPrice } = useContext(Context);
   const cartItems = JSON.parse(localStorage.getItem('carrinho')) || [];
 
   const removeItem = (itemId) => {
     const newSell = cartItems.filter((item) => item.id !== Number(itemId));
     localStorage.setItem('carrinho', JSON.stringify(newSell));
   };
+
+  const getTotalPrice = useCallback(() => {
+    const carrinho = getLocalStorage('carrinho');
+    if (carrinho) {
+      const total = carrinho.reduce((acc, cur) => +cur.subtotal + acc, 0);
+      setTotalPrice(total.toFixed(2));
+    }
+  }, [setTotalPrice]);
+
+  useEffect(
+    () => {
+      getTotalPrice();
+    },
+    [getTotalPrice],
+  );
 
   return (
     <div>
@@ -78,6 +96,9 @@ function CheckoutTable() {
           }
         </tbody>
       </table>
+      <p data-testid="customer_checkout__element-order-total-price">
+        {`${totalPrice}`.replace('.', ',')}
+      </p>
     </div>
   );
 }
