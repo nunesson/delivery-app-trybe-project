@@ -26,7 +26,7 @@ export default function Cards({ name, price, urlImage, id }) {
     price,
     urlImage,
     quantity: qtdState,
-    subtotal: +qtdState * +price,
+    subtotal: (+qtdState * +price).toFixed(2),
   };
 
   const incrementQtd = () => {

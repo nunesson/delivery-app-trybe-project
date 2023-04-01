@@ -70,14 +70,14 @@ function CheckoutTable() {
                     `customer_checkout__element-order-table-unit-price-${index}`
                   }
                 >
-                  {item.price}
+                  {`${item.price}`.replace('.', ',')}
                 </td>
                 <td
                   data-testid={
                     `customer_checkout__element-order-table-sub-total-${index}`
                   }
                 >
-                  {item.subtotal}
+                  {`${item.subtotal}`.replace('.', ',')}
                 </td>
                 <td
                   data-testid={
