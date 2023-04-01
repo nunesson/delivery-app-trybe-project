@@ -1,15 +1,10 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Context from '../Context/myContext';
 import { getLocalStorage } from '../LocalStorage/localStorage';
 
 function CheckoutTable() {
   const { totalPrice, setTotalPrice } = useContext(Context);
-  const cartItems = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-  const removeItem = (itemId) => {
-    const newSell = cartItems.filter((item) => item.id !== Number(itemId));
-    localStorage.setItem('carrinho', JSON.stringify(newSell));
-  };
+  const [cartItems, setCartItems] = useState();
 
   const getTotalPrice = useCallback(() => {
     const carrinho = getLocalStorage('carrinho');
@@ -19,8 +14,20 @@ function CheckoutTable() {
     }
   }, [setTotalPrice]);
 
+  const removeItem = (itemId) => {
+    const newSell = cartItems.filter((item) => {
+      console.log(itemId);
+      return item.id !== Number(itemId);
+    });
+    console.log(newSell);
+    localStorage.setItem('carrinho', JSON.stringify(newSell));
+    getTotalPrice();
+    setCartItems(newSell);
+  };
+
   useEffect(
     () => {
+      setCartItems(getLocalStorage('carrinho'));
       getTotalPrice();
     },
     [getTotalPrice],
@@ -41,8 +48,9 @@ function CheckoutTable() {
           </tr>
         </thead>
         <tbody>
+          {console.log(cartItems)}
           {
-            cartItems.map((item, index) => (
+            cartItems?.map((item, index) => (
               <tr key={ index }>
                 <td
                   data-testid={
@@ -86,7 +94,8 @@ function CheckoutTable() {
                 >
                   <button
                     type="button"
-                    onClick={ (ele) => removeItem(ele.target.id) }
+                    value={ item.id }
+                    onClick={ (ele) => removeItem(ele.target.value) }
                   >
                     Remover
                   </button>
