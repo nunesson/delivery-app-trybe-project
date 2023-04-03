@@ -8,26 +8,32 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       userId: {
+        field: 'user_id',
         type: Sequelize.STRING,
         allowNull: false,
       },
       sellerId: {
+        field: 'seller_id',
         type: Sequelize.STRING,
         allowNull: false,
       },
       totalPrice: {
+        field: 'total_price',
         type: Sequelize.STRING,
         allowNull: false,
       },
       deliveryAddress: {
+        field: 'delivery_address',
         type: Sequelize.STRING,
         allowNull: false,
       },
       deliveryNumber: {
+        field: 'delivery_number',
         type: Sequelize.STRING,
         allowNull: false,
       },
       saleDate: {
+        field: 'sale_date',
         type: Sequelize.STRING,
         allowNull: false,
       },
