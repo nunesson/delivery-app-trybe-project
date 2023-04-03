@@ -32,10 +32,10 @@ const users = (sequelize, DataTypes) => {
       timestamps: false,
     });
 
-    users.associate = (models) => {
-      users.hasMany(models.sales, { foreignKey: 'userId' });
-      users.hasMany(models.sales, { foreignKey: 'sellerId' });
-    };
+    // users.associate = (models) => {
+    //   users.hasMany(models.sales, { foreignKey: 'userId' });
+    //   users.hasMany(models.sales, { foreignKey: 'sellerId' });
+    // };
     
   return users;
 };
