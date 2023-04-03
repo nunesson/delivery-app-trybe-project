@@ -28,8 +28,8 @@ function CheckoutDetails() {
   const handleButton = async () => {
     const userToken = getLocalStorage('user').token;
     const { data } = await genericRoutes('sales', 'post', {
-      ...orders, totalPrice, userToken,
-    });
+      ...orders, totalPrice,
+    }, { headers: { Authorization: userToken } });
     history.push(`/customer/orders/${data.id}`);
     console.log(data);
     return data;

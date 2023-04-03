@@ -6,8 +6,7 @@ const createSale = async ({
   deliveryNumber,
   sellerId,
   totalPrice,
-  userToken,
-}) => {
+}, userToken) => {
   const user = decodeToken(userToken);
   const newSale = await sales.create({ 
     userId: user.id, 

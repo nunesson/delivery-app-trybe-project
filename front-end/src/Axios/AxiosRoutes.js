@@ -1,10 +1,10 @@
 const axios = require('axios');
 
-const genericRoutes = async (route, type, data) => {
+const genericRoutes = async (route, type, data, headers) => {
   switch (type) {
   case 'post':
     try {
-      const response = await axios.post(`http://localhost:3001/${route}`, data);
+      const response = await axios.post(`http://localhost:3001/${route}`, data, headers);
       return response;
     } catch (error) {
       const { status } = error.response;
