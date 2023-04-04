@@ -1,6 +1,7 @@
 // import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { genericRoutes } from '../Axios/AxiosRoutes';
 import Context from './myContext';
 
 function Provider({ children }) {
@@ -13,6 +14,17 @@ function Provider({ children }) {
   const [errorStatus, setErrorStatus] = useState(false);
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [sellers, setSellers] = useState([]);
+  const [orders, setOrders] = useState({});
+
+  const getSellers = async () => {
+    const { data } = await genericRoutes('seller', 'get');
+    setSellers(data);
+    setOrders({ sellerId: data[0].id });
+    return sellers;
+  };
+
+  useEffect(() => getSellers(), []);
 
   const listData = useMemo(
     () => ({
@@ -26,8 +38,13 @@ function Provider({ children }) {
       setProducts,
       totalPrice,
       setTotalPrice,
+      sellers,
+      setSellers,
+      orders,
+      setOrders,
+      getSellers,
     }),
-    [newUser, stateBtn, errorStatus, products, totalPrice],
+    [newUser, stateBtn, errorStatus, products, totalPrice, sellers, orders, getSellers],
   );
   return <Context.Provider value={ listData }>{children}</Context.Provider>;
 }

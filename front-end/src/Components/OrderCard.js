@@ -23,7 +23,7 @@ function OrderCard({ id, status, saleDate, totalPrice }) {
   };
 
   return (
-    <Link to={ `customer/orders/${id}` }>
+    <Link to={ `/customer/orders/${id}` }>
       <div>
         <p data-testid={ `customer_orders__element-order-id-${id}` }>{id}</p>
         <p data-testid={ `customer_orders__element-delivery-status-id-${id}` }>

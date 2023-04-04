@@ -1,4 +1,4 @@
-const { createSale } = require('../Services/Sales.service');
+const { createSale, findById } = require('../Services/Sales.service');
 const saleService = require('../Services/Sales.service');
 
 const createSaleController = async (req, res) => {
@@ -16,4 +16,16 @@ const findAll = async (req, res, next) => {
   }
 };
 
-module.exports = { createSaleController, findAll };
+const findOneSale = async (req, res) => {
+  const { params: { id } } = req;
+
+  const sale = await findById(id);
+
+  if (sale.type === 'error') {
+    return res.status(404).json({ message: sale.message });
+  }
+
+  return res.status(200).json(sale);
+};
+
+module.exports = { createSaleController, findAll, findOneSale };
