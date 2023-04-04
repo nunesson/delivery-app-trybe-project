@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { setLocalStorage, getLocalStorage } from '../LocalStorage/localStorage';
 import { genericRoutes } from '../Axios/AxiosRoutes';
 
@@ -12,13 +12,15 @@ function Login() {
 
   const [state, setState] = useState(initialState);
   const [stateBtn, setStateBtn] = useState(true);
+  const [errorState, setErrorState] = useState(false);
+
+  const history = useHistory();
 
   const verifyValues = () => {
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     const number = 5;
     const validateEmail = state.email.match(emailRegex);
     const validatePassword = state.password.length > number;
-    console.log(state);
     if (validateEmail && validatePassword) {
       return setStateBtn(false);
     }
@@ -32,16 +34,15 @@ function Login() {
     });
   };
 
-  const [errorState, setErrorState] = useState(false);
-
-  const [redirectState, setredirectState] = useState(false);
-
   const onClickLogin = () => {
     const statusHTTP = 200;
     axios.post('http://localhost:3001/login', { ...state }).then((res) => {
-      if (res.status === statusHTTP) setredirectState(true);
-      const { name, email, role, token } = res.data;
-      setLocalStorage('user', { name, email, role, token });
+      if (res.status === statusHTTP) {
+        const { name, email, role, token } = res.data;
+        setLocalStorage('user', { name, email, role, token });
+        if (role === 'customer') history.push('/customer/products');
+        if (role === 'administrator') history.push('/admin/manage');
+      }
     }).catch((error) => {
       setErrorState(true);
       console.error(error.message);
@@ -52,21 +53,19 @@ function Login() {
     const user = getLocalStorage('user');
 
     if (user) {
-      const { data } = await genericRoutes(
+      await genericRoutes(
         'login',
         'post',
         user,
         { headers: { Authorization: user.token } },
       );
-
-      setredirectState(true);
-
-      return data;
+      if (user.role === 'customer') history.push('/customer/products');
+      if (user.role === 'administrator') history.push('/admin/manage');
     }
   };
 
   const onClickRegister = () => {
-    window.location.replace('http://localhost:3000/register');
+    history.push('/register');
   };
 
   useEffect(() => {
@@ -121,7 +120,6 @@ function Login() {
         >
           Tá errado isso aí
         </h3>)}
-      { redirectState && <Redirect to="/customer/products" /> }
     </div>
   );
 }
