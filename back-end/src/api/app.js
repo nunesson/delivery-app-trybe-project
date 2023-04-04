@@ -6,6 +6,7 @@ const routers = require('./Router/Router');
 const app = express();
 
 app.use(express.json());
+
 app.use(express.static('public'));
 
 app.use(cors());
@@ -13,7 +14,5 @@ app.use(cors());
 app.use(routers);
 
 app.use(error);
-
-app.use(express.json());
 
 module.exports = app;

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import { setLocalStorage } from '../LocalStorage/localStorage';
+import { setLocalStorage, getLocalStorage } from '../LocalStorage/localStorage';
+import { genericRoutes } from '../Axios/AxiosRoutes';
 
 function Login() {
   const initialState = {
@@ -47,11 +48,31 @@ function Login() {
     });
   };
 
+  const verifyLogin = async () => {
+    const user = getLocalStorage('user');
+
+    if (user) {
+      const { data } = await genericRoutes(
+        'login',
+        'post',
+        user,
+        { headers: { Authorization: user.token } },
+      );
+
+      setredirectState(true);
+
+      return data;
+    }
+  };
+
   const onClickRegister = () => {
     window.location.replace('http://localhost:3000/register');
   };
 
-  useEffect(() => verifyValues());
+  useEffect(() => {
+    verifyValues();
+    verifyLogin();
+  });
 
   return (
     <div className="login">

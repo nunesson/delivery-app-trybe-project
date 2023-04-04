@@ -9,8 +9,11 @@ function CustomerOrders() {
 
   const getSales = async () => {
     const { data } = await genericRoutes('sales', 'get');
-    setSales(data);
-    return sales;
+
+    if (sales) {
+      setSales(data);
+      return sales;
+    }
   };
 
   useEffect(() => {
@@ -29,7 +32,6 @@ function CustomerOrders() {
           totalPrice={ sale.totalPrice }
         />
       ))}
-      { /* Passar os props Id, Price, Status e date atraves de um map */}
     </div>
   );
 }

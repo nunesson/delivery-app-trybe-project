@@ -13,10 +13,30 @@ function NavBar() {
     history.push('/login');
   };
 
+  const onClickProducts = () => {
+    history.push('/customer/products');
+  };
+
+  const onClickOrders = () => {
+    history.push('/customer/orders');
+  };
+
   return (
     <div className="products">
-      <h1 data-testid="customer_products__element-navbar-link-products">Produtos</h1>
-      <h1 data-testid="customer_products__element-navbar-link-orders">Meus Pedidos</h1>
+      <button
+        type="button"
+        onClick={ onClickProducts }
+        data-testid="customer_products__element-navbar-link-products"
+      >
+        Produtos
+      </button>
+      <button
+        type="button"
+        onClick={ onClickOrders }
+        data-testid="customer_products__element-navbar-link-orders"
+      >
+        Meus Pedidos
+      </button>
       <h1
         data-testid="customer_products__element-navbar-user-full-name"
       >
