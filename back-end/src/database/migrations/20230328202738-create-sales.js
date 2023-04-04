@@ -9,17 +9,17 @@ module.exports = {
       },
       userId: {
         field: 'user_id',
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       sellerId: {
         field: 'seller_id',
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       totalPrice: {
         field: 'total_price',
-        type: Sequelize.STRING,
+        type: Sequelize.DECIMAL(9,2),
         allowNull: false,
       },
       deliveryAddress: {
@@ -34,7 +34,7 @@ module.exports = {
       },
       saleDate: {
         field: 'sale_date',
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       status: {

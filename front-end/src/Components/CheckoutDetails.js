@@ -27,12 +27,18 @@ function CheckoutDetails() {
 
   const handleButton = async () => {
     const userToken = getLocalStorage('user').token;
+
+    const carrinho = getLocalStorage('carrinho');
+
     const { data } = await genericRoutes('sales', 'post', {
       ...orders, totalPrice,
     }, { headers: { Authorization: userToken } });
+
+    await genericRoutes('sales/products', 'post', {
+      carrinho, saleId: data.id,
+    });
+
     history.push(`/customer/orders/${data.id}`);
-    console.log(data);
-    return data;
   };
 
   useEffect(() => {
