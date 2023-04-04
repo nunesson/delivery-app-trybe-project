@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function OrderCard({ id, status, date, price }) {
+function OrderCard({ id, status, saleDate, totalPrice }) {
   return (
     <div>
       <p data-testid={ `customer_orders__element-order-id-${id}` }>{id}</p>
-      <h1
-        data-testid={ `customer_orders__element-delivery-status-id-${id}` }
-      >
+      <p data-testid={ `customer_orders__element-delivery-status-id-${id}` }>
         {status}
-      </h1>
-      <p data-testid={ `customer_orders__element-card-price-id-${id}` }>{date}</p>
-      <p>{price}</p>
+      </p>
+      <p data-testid={ `customer_orders__element-order-date-${id}` }>{saleDate}</p>
+      <p data-testid={ `customer_orders__element-card-price-id-${id}` }>{totalPrice}</p>
     </div>
   );
 }
