@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function OrderCard({ id, status, saleDate, totalPrice }) {
   const formatedDate = (data) => {
@@ -22,20 +23,23 @@ function OrderCard({ id, status, saleDate, totalPrice }) {
   };
 
   return (
-    <div>
-      <p data-testid={ `customer_orders__element-order-id-${id}` }>{id}</p>
-      <p data-testid={ `customer_orders__element-delivery-status-id-${id}` }>
-        {status}
-      </p>
-      <p data-testid={ `customer_orders__element-order-date-${id}` }>
-        {
-          formatedDate(saleDate)
-        }
-      </p>
-      <p data-testid={ `customer_orders__element-card-price-id-${id}` }>
-        {`${totalPrice}`.replace('.', ',')}
-      </p>
-    </div>
+    <Link to={ `customer/orders/${id}` }>
+      <div>
+        <p data-testid={ `customer_orders__element-order-id-${id}` }>{id}</p>
+        <p data-testid={ `customer_orders__element-delivery-status-id-${id}` }>
+          {status}
+        </p>
+        <p data-testid={ `customer_orders__element-order-date-${id}` }>
+          {
+            formatedDate(saleDate)
+          }
+        </p>
+        <p data-testid={ `customer_orders__element-card-price-id-${id}` }>
+          {`${totalPrice}`.replace('.', ',')}
+        </p>
+      </div>
+    </Link>
+
   );
 }
 
