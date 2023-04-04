@@ -9,8 +9,11 @@ function CustomerOrders() {
 
   const getSales = async () => {
     const { data } = await genericRoutes('sales', 'get');
-    setSales(data);
-    return sales;
+
+    if (sales) {
+      setSales(data);
+      return sales;
+    }
   };
 
   useEffect(() => {
