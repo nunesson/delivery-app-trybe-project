@@ -1,4 +1,5 @@
 const { createSale } = require('../Services/Sales.service');
+const saleService = require('../Services/Sales.service');
 
 const createSaleController = async (req, res) => {
   const { headers: { authorization } } = req;
@@ -6,4 +7,13 @@ const createSaleController = async (req, res) => {
   return res.status(201).json(result);
 };
 
-module.exports = { createSaleController };
+const findAll = async (req, res, next) => {
+  try {
+      const allSales = await saleService.findAll();
+      res.status(200).json(allSales);
+  } catch (err) {
+      next(err);
+  }
+};
+
+module.exports = { createSaleController, findAll };

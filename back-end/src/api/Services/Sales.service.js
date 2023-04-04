@@ -20,4 +20,9 @@ const createSale = async ({
   return newSale;
 };
 
-module.exports = { createSale };
+const findAll = async () => {
+  const allSales = await sales.findAll();
+  return allSales;
+};
+
+module.exports = { createSale, findAll };
