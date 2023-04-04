@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function OrdersTable({ id, name, date, status, index }) {
+function OrdersTable({ id, name, saleDate, status }) {
+  const dTStatus = 'customer_order_details__element-order-details-label-delivery-status';
   return (
     <table>
       <thead>
@@ -12,18 +13,17 @@ function OrdersTable({ id, name, date, status, index }) {
             {`Pedido ${id}`}
           </th>
           <th
-            data-testid="customer_order_details__element-order-details-label-order-id"
+            data-testid="customer_order_details__element-order-details-label-seller-name"
           >
             {name}
           </th>
           <th
             data-testid="customer_order_details__element-order-details-label-order-date"
           >
-            {date}
+            {saleDate}
           </th>
           <th
-            data-testid={ `customer_order_details_
-            _element-order-details-label-delivery-status${index}` }
+            data-testid={ dTStatus }
           >
             {status}
           </th>
