@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { users } = require('../../database/models');
-const { generateToken } = require('../../jwt/jwt');
+const { generateToken, decodeToken } = require('../../jwt/jwt');
 
 const verifyUser = async (userEmail, userPassword) => {
   const findUser = await users.findOne({ where: { email: userEmail } });
@@ -18,4 +18,10 @@ const verifyUser = async (userEmail, userPassword) => {
   return { type: 'error', message: 'Invalid Password' };
 };
 
-module.exports = { verifyUser };
+const getUser = (token) => {
+  const user = decodeToken(token);
+
+  return user;
+};
+
+module.exports = { verifyUser, getUser };

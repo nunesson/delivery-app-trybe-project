@@ -29,7 +29,6 @@ function CustomerOrders() {
           totalPrice={ sale.totalPrice }
         />
       ))}
-      { /* Passar os props Id, Price, Status e date atraves de um map */}
     </div>
   );
 }
