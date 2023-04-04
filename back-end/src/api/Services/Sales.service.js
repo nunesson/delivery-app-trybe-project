@@ -14,7 +14,7 @@ const createSale = async ({
     totalPrice,
     deliveryAddress,
     deliveryNumber,
-    saleDate: new Date('2023-04-03T00:00:00Z'),
+    saleDate: new Date(),
     status: 'Pendente',
    });
   return newSale;

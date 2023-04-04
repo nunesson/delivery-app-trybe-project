@@ -25,7 +25,6 @@ const products = (sequelize, DataTypes) => {
         },
     },
     {
-
         tableName: 'products',
         underscored: true,
         timestamps: false,
