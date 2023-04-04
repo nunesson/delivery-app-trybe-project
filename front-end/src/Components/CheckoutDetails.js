@@ -1,22 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { genericRoutes } from '../Axios/AxiosRoutes';
 import Context from '../Context/myContext';
 import { getLocalStorage } from '../LocalStorage/localStorage';
 
 function CheckoutDetails() {
-  const { totalPrice } = useContext(Context);
-  const [sellers, setSellers] = useState([]);
-  const [orders, setOrders] = useState({});
+  const { totalPrice, sellers, orders, setOrders, getSellers } = useContext(Context);
 
   const history = useHistory();
-
-  const getSellers = async () => {
-    const { data } = await genericRoutes('seller', 'get');
-    setSellers(data);
-    setOrders({ sellerId: data[0].id });
-    return sellers;
-  };
 
   const onChangeForms = ({ target: { value, name } }) => {
     setOrders((prevOrders) => ({

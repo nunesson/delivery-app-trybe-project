@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import Context from '../Context/myContext';
 
-function OrdersTable({ id, name, saleDate, status }) {
+function OrdersTable({ id, sellerId, saleDate, status }) {
+  const { sellers } = useContext(Context);
+
+  const sellerName = () => {
+    if (sellers.length !== 0 && sellerId) {
+      const seller = sellers.find((s) => s.id === sellerId);
+
+      console.log(seller);
+
+      return seller.name;
+    }
+
+    return '';
+  };
+
+  const formatedDate = (data) => {
+    const fullDate = new Date(data);
+    const date = fullDate.getDate();
+    const month = fullDate.getMonth();
+    const year = fullDate.getFullYear();
+
+    if (`${date}`.length === 1 && `${month}`.length === 1) {
+      return `0${date}/0${month + 1}/${year}`;
+    }
+
+    if (`${date}`.length === 1) {
+      return `0${date}/${month + 1}/${year}`;
+    }
+
+    if (`${month}`.length === 1) {
+      return `${date}/0${month + 1}/${year}`;
+    }
+  };
+
   const dTStatus = 'customer_order_details__element-order-details-label-delivery-status';
   return (
     <table>
@@ -15,12 +49,12 @@ function OrdersTable({ id, name, saleDate, status }) {
           <th
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            {name}
+            { sellerName() }
           </th>
           <th
             data-testid="customer_order_details__element-order-details-label-order-date"
           >
-            {saleDate}
+            { formatedDate(saleDate) }
           </th>
           <th
             data-testid={ dTStatus }
@@ -29,6 +63,7 @@ function OrdersTable({ id, name, saleDate, status }) {
           </th>
           <button
             type="button"
+            disabled={ status === 'Pendente' }
             data-testid="customer_order_details__button-delivery-check"
           >
             MARCAR COMO ENTREGUE

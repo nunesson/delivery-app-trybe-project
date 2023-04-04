@@ -24,7 +24,7 @@ function CustomerOrdersDetails(props) {
       <NavBar />
       <OrdersTable
         id={ orders?.id }
-        name={ orders?.sellerId }
+        sellerId={ orders?.sellerId }
         saleDate={ orders?.saleDate }
         status={ orders?.status }
       />
@@ -44,7 +44,7 @@ function CustomerOrdersDetails(props) {
       { /* Fazer um map e passar os props Index, quantity, price e subtotal */}
       <h1 data-testid="customer_order_details__element-order-total-price">
         {
-          `Total: R$${orders?.totalPrice}`
+          `Total: R$${orders?.totalPrice}`.replace('.', ',')
         }
       </h1>
     </div>
