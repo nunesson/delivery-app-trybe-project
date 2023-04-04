@@ -25,4 +25,16 @@ const findAll = async () => {
   return allSales;
 };
 
-module.exports = { createSale, findAll };
+const findById = async (id) => {
+  const sale = await sales.findByPk(id);
+
+  if (!sale) {
+    return { type: 'error', message: 'Sale not found' };
+  }
+
+  if (sale) {
+    return sale;
+  }
+};
+
+module.exports = { createSale, findAll, findById };
