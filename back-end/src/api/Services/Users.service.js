@@ -6,4 +6,6 @@ const verifySeller = async () => {
   return findSeller;
 };
 
-module.exports = { verifySeller };
+const getUsers = async () => users.findAll();
+
+module.exports = { verifySeller, getUsers };
