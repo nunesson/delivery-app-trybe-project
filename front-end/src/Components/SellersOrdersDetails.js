@@ -53,7 +53,7 @@ function SellersOrdersCard({
         <button
           type="button"
           data-testid="seller_order_details__button-preparing-check"
-          disabled={ validStatus(status) }
+        //   disabled={ validStatus(status) }
         >
           Preparar Pedido
 
