@@ -42,6 +42,7 @@ function Login() {
         setLocalStorage('user', { name, email, role, token });
         if (role === 'customer') history.push('/customer/products');
         if (role === 'administrator') history.push('/admin/manage');
+        if (role === 'seller') history.push('/seller/orders');
       }
     }).catch((error) => {
       setErrorState(true);
@@ -61,6 +62,7 @@ function Login() {
       );
       if (user.role === 'customer') history.push('/customer/products');
       if (user.role === 'administrator') history.push('/admin/manage');
+      if (user.role === 'seller') history.push('/seller/orders');
     }
   };
 
