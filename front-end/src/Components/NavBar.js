@@ -5,6 +5,7 @@ import { getLocalStorage, removeLocalStorage } from '../LocalStorage/localStorag
 function NavBar() {
   const [userName, setUserName] = useState('');
   const history = useHistory();
+  const { role } = getLocalStorage('user');
 
   useEffect(() => { setUserName(getLocalStorage('user').name); }, []);
 
@@ -18,7 +19,7 @@ function NavBar() {
   };
 
   const onClickOrders = () => {
-    history.push('/customer/orders');
+    history.push(`/${role}/orders`);
   };
 
   return (
