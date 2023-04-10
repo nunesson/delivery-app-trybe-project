@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { genericRoutes } from '../Axios/AxiosRoutes';
 import Context from '../Context/myContext';
 
 function SellersOrdersCard({ id, status, saleDate, totalPrice, products }) {
-  const { setUpdate, update, setUpdate2, update2 } = useContext(Context);
+  const { setUpdate, setUpdate2 } = useContext(Context);
   const sod = 'seller_order_details';
   const formatedDate = (data) => {
     const fullDate = new Date(data);
@@ -38,66 +37,64 @@ function SellersOrdersCard({ id, status, saleDate, totalPrice, products }) {
   };
 
   return (
-    <Link to={ `/seller/orders/${id}` }>
-      <div>
-        <p data-testid="seller_order_details__element-order-details-label-order-id">
-          {id}
-        </p>
-        <p data-testid={ `${sod}__element-order-details-label-delivery-status` }>
-          {status}
-        </p>
-        <p data-testid="seller_order_details__element-order-details-label-order-date">
-          {formatedDate(saleDate)}
-        </p>
-        <button
-          type="button"
-          data-testid="seller_order_details__button-preparing-check"
-          disabled={ update }
-          onClick={ handlePrepareButton }
-        >
-          Preparar Pedido
-        </button>
+    <div>
+      <p data-testid="seller_order_details__element-order-details-label-order-id">
+        {id}
+      </p>
+      <p data-testid={ `${sod}__element-order-details-label-delivery-status` }>
+        {status}
+      </p>
+      <p data-testid="seller_order_details__element-order-details-label-order-date">
+        {formatedDate(saleDate)}
+      </p>
+      <button
+        type="button"
+        data-testid="seller_order_details__button-preparing-check"
+        disabled={ status !== 'Pendente' }
+        onClick={ handlePrepareButton }
+      >
+        Preparar Pedido
+      </button>
 
-        <button
-          type="button"
-          data-testid="seller_order_details__button-dispatch-check"
-          disabled={ update2 }
-          onClick={ handleDeliveryBtn }
-        >
-          Saiu para entrega
-        </button>
-        { products[0]?.products?.map((ele, index) => (
-          <div key={ index }>
-            <p data-testid={ `${sod}__element-order-table-item-number-${id}` }>
-              {index + 1}
-            </p>
-            <p
-              data-testid={ `seller_order_details__element-order-table-name-${id}` }
-            >
-              {ele.name}
-            </p>
-            <p
-              data-testid={ `seller_order_details__element-order-table-quantity-${id}` }
-            >
-              {ele.salesProducts.quantity}
-            </p>
-            <p
-              data-testid={ `seller_order_details__element-order-table-unit-price-${id}` }
-            >
-              {ele.price.replace('.', ',')}
-            </p>
-            <p
-              data-testid={ `seller_order_details__element-order-table-sub-total-${id}` }
-            >
-              {(ele.price * ele.salesProducts.quantity).toFixed(2).replace('.', ',')}
-            </p>
-          </div>
-        ))}
-        <p data-testid="seller_order_details__element-order-total-price">
-          {`${totalPrice}`.replace('.', ',')}
-        </p>
-      </div>
-    </Link>
+      <button
+        type="button"
+        data-testid="seller_order_details__button-dispatch-check"
+        disabled={ status !== 'Preparando' }
+        onClick={ handleDeliveryBtn }
+      >
+        Saiu para entrega
+      </button>
+      { products[0]?.products?.map((ele, index) => (
+        <div key={ index }>
+          <p data-testid={ `${sod}__element-order-table-item-number-${id}` }>
+            {index + 1}
+          </p>
+          <p
+            data-testid={ `seller_order_details__element-order-table-name-${id}` }
+          >
+            {ele.name}
+          </p>
+          <p
+            data-testid={ `seller_order_details__element-order-table-quantity-${id}` }
+          >
+            {ele.salesProducts.quantity}
+          </p>
+          <p
+            data-testid={ `seller_order_details__element-order-table-unit-price-${id}` }
+          >
+            {ele.price.replace('.', ',')}
+          </p>
+          <p
+            data-testid={ `seller_order_details__element-order-table-sub-total-${id}` }
+          >
+            {(ele.price * ele.salesProducts.quantity).toFixed(2).replace('.', ',')}
+          </p>
+        </div>
+      ))}
+      <p data-testid="seller_order_details__element-order-total-price">
+        {`${totalPrice}`.replace('.', ',')}
+      </p>
+    </div>
   );
 }
 
