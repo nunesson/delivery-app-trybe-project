@@ -35,15 +35,12 @@ function Login() {
   };
 
   const onClickLogin = () => {
-    const statusHTTP = 200;
     axios.post('http://localhost:3001/login', { ...state }).then((res) => {
-      if (res.status === statusHTTP) {
-        const { name, email, role, token } = res.data;
-        setLocalStorage('user', { name, email, role, token });
-        if (role === 'customer') history.push('/customer/products');
-        if (role === 'administrator') history.push('/admin/manage');
-        if (role === 'seller') history.push('/seller/orders');
-      }
+      const { name, email, role, token } = res.data;
+      setLocalStorage('user', { name, email, role, token });
+      if (role === 'customer') history.push('/customer/products');
+      if (role === 'administrator') history.push('/admin/manage');
+      if (role === 'seller') history.push('/seller/orders');
     }).catch((error) => {
       setErrorState(true);
       console.error(error.message);
@@ -52,7 +49,6 @@ function Login() {
 
   const verifyLogin = async () => {
     const user = getLocalStorage('user');
-
     if (user) {
       await genericRoutes(
         'login',
