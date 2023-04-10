@@ -16,6 +16,9 @@ function Provider({ children }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [sellers, setSellers] = useState([]);
   const [orders, setOrders] = useState({});
+  const [update, setUpdate] = useState(false);
+  const [update2, setUpdate2] = useState(true);
+  const [update3, setUpdate3] = useState(false);
 
   const getSellers = async () => {
     const { data } = await genericRoutes('seller', 'get');
@@ -43,8 +46,26 @@ function Provider({ children }) {
       orders,
       setOrders,
       getSellers,
+      update,
+      setUpdate,
+      update2,
+      setUpdate2,
+      update3,
+      setUpdate3,
     }),
-    [newUser, stateBtn, errorStatus, products, totalPrice, sellers, orders, getSellers],
+    [
+      newUser,
+      stateBtn,
+      errorStatus,
+      products,
+      totalPrice,
+      sellers,
+      orders,
+      getSellers,
+      update,
+      update2,
+      update3,
+    ],
   );
   return <Context.Provider value={ listData }>{children}</Context.Provider>;
 }

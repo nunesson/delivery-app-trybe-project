@@ -1,16 +1,14 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../Context/myContext';
+import { genericRoutes } from '../Axios/AxiosRoutes';
 
 function OrdersTable({ id, sellerId, saleDate, status }) {
-  const { sellers } = useContext(Context);
+  const { sellers, setUpdate3 } = useContext(Context);
 
   const sellerName = () => {
     if (sellers.length !== 0 && sellerId) {
       const seller = sellers.find((s) => s.id === sellerId);
-
-      console.log(seller);
-
       return seller.name;
     }
 
@@ -36,40 +34,53 @@ function OrdersTable({ id, sellerId, saleDate, status }) {
     }
   };
 
+  const handleDeliveryBtn = () => {
+    genericRoutes(`sales/orders/${id}`, 'put', { status: 'Entregue' });
+    setUpdate3(true);
+  };
+
   const dTStatus = 'customer_order_details__element-order-details-label-delivery-status';
   return (
     <table>
       <thead>
         <tr>
-          <th
+          <th>id</th>
+          <th>vendedor</th>
+          <th>data</th>
+          <th>status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
             data-testid="customer_order_details__element-order-details-label-order-id"
           >
             {`Pedido ${id}`}
-          </th>
-          <th
+          </td>
+          <td
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            { sellerName() }
-          </th>
-          <th
+            {sellerName()}
+          </td>
+          <td
             data-testid="customer_order_details__element-order-details-label-order-date"
           >
-            { formatedDate(saleDate) }
-          </th>
-          <th
-            data-testid={ dTStatus }
-          >
-            {status}
-          </th>
-          <button
-            type="button"
-            disabled={ status === 'Pendente' }
-            data-testid="customer_order_details__button-delivery-check"
-          >
-            MARCAR COMO ENTREGUE
-          </button>
+            {formatedDate(saleDate)}
+          </td>
+          <td data-testid={ dTStatus }>{status}</td>
+          <td>
+
+            <button
+              type="button"
+              disabled={ status !== 'Em Trânsito' }
+              data-testid="customer_order_details__button-delivery-check"
+              onClick={ handleDeliveryBtn }
+            >
+              MARCAR COMO ENTREGUE
+            </button>
+          </td>
         </tr>
-      </thead>
+      </tbody>
     </table>
   );
 }
