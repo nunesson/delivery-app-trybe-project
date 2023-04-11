@@ -134,7 +134,7 @@ function AdminManager() {
               {index + 1}
             </td>
             <td
-              data-testid="admin_manage__input-email"
+              data-testid={ `admin_manage__element-user-table-name-${index}` }
             >
               {e.name}
             </td>
