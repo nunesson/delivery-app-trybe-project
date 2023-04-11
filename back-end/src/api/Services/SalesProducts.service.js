@@ -2,12 +2,10 @@ const { salesProducts, products, sales } = require('../../database/models');
 
 const createSalesProduct = async ({ carrinho, saleId }) => {
   const createCarrinho = carrinho.map(async (c) => {
-    const result = await salesProducts.create({ 
+    await salesProducts.create({ 
       saleId, 
       productId: c.id, 
       quantity: c.quantity });
-    
-    return result;
   });
 
   await Promise.all(createCarrinho);
@@ -33,10 +31,8 @@ const findBySaleId = async (id) => {
   if (orders.length === 0) {
     return { type: 'error', message: 'Order not found' };
   }
-
-  if (orders) {
-    return orders;
-  }
+  
+  return orders;
 };
 
 module.exports = {

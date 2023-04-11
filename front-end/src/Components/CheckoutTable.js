@@ -19,7 +19,6 @@ function CheckoutTable() {
       console.log(itemId);
       return item.id !== Number(itemId);
     });
-    console.log(newSell);
     localStorage.setItem('carrinho', JSON.stringify(newSell));
     getTotalPrice();
     setCartItems(newSell);
@@ -48,7 +47,6 @@ function CheckoutTable() {
           </tr>
         </thead>
         <tbody>
-          {console.log(cartItems)}
           {
             cartItems?.map((item, index) => (
               <tr key={ index }>

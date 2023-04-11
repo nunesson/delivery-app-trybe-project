@@ -7,8 +7,9 @@ const register = async (req, res, next) => {
     const admin = decodeToken(authorization);
     if (admin.role === 'administrator') {
       const newUser = await adminService.register(req.body);
-      res.status(201).json(newUser);
+      return res.status(201).json(newUser);
     }
+    return res.status(403).json({ message: 'Acesso negado' });
   } catch (err) {
     next(err);
   }

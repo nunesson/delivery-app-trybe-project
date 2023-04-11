@@ -1,8 +1,6 @@
 const error = (err, req, res, _next) => {
-    const status = err.statusCode || 500;
-    const message = err.message || 'Erro inesperado. Por favor, tente mais tarde';
-  console.log(err);
-    return res.status(status).json({ message });
+  const { message, statusCode } = err;
+    return res.status(statusCode).json({ message });
   };
 
   const errorType = (condition, message, statusCode) => {

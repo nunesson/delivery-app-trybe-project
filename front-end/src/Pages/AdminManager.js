@@ -40,15 +40,13 @@ function AdminManager() {
   const onClickRegister = async () => {
     // const statusHTTP = 201;
     const statusHTTPConflict = 409;
-    console.log(state);
     const user = getLocalStorage('user');
-    const { status, data } = await genericRoutes(
+    const { status } = await genericRoutes(
       'admin',
       'post',
       state,
       { headers: { Authorization: user.token } },
     );
-    console.log(data);
     if (status === statusHTTPConflict) return setErrorStatus(true);
     getUsers();
   };
