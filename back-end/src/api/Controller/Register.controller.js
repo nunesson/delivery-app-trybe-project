@@ -1,9 +1,9 @@
-const loginService = require('../Services/Register.service');
+    const loginService = require('../Services/Register.service');
 
 const register = async (req, res, next) => {
     try {
-        const user = await loginService.register(req.body);
-        res.status(201).json(user);
+        const token = await loginService.register(req.body);
+        res.status(201).json(token);
     } catch (err) {
         next(err);
     }

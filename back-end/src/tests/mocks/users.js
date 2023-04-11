@@ -60,6 +60,18 @@ const getUserReturn = {
   iat: 1681142112
 }
 
+const newRegister = {
+  name: "Usuario muito inteligente",
+  email: "email@email.com",
+  password: "senhasenhasenha",
+}
+
+const invalidRegister = {
+  name: "Usuario muito inteligente",
+  email: "zebirita@email.com",
+  password: "senhasenhasenha",
+}
+
 module.exports = {
   allUsers,
   onlyCustomer,
@@ -68,4 +80,6 @@ module.exports = {
   invalidCustomerPassword,
   getUserReturn,
   token,
+  newRegister,
+  invalidRegister,
 }

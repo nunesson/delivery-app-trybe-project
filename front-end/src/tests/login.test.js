@@ -4,19 +4,6 @@ import userEvent from "@testing-library/user-event";
 import App from "../App";
 import renderWithRouter from "./renderWithRouter";
 
-const zebirita = {
-  email: "zebirita@email.com",
-  name: "Cliente Zé Birita",
-  role: "customer",
-  token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-  .eyJpZCI6MywibmFtZSI6IkNsaWVudGUgWsOpIEJpcml
-  0YSIsImVtYWlsIjoiemViaXJpdGFAZW1haWwuY29tIiw
-  icGFzc3dvcmQiOiIxYzM3NDY2YzE1OTc1NWNlMWZhMTg
-  xYmQyNDdjYjkyNSIsInJvbGUiOiJjdXN0b21lciIsIml
-  hdCI6MTY4MTE1MzU3MX0
-  .t423j3zq5wGm9ePYAaOR5p3vF9FYFV5T0CVnCJzfz8k`
-}
-
 describe("Testa a página Login", () => {
 
   beforeEach(() => {

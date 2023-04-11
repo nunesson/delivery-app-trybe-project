@@ -16,9 +16,7 @@ const aproveUsers = async (req, res) => {
     return res.status(200).json(result);
   }
 
-  if (result.type === 'error') {
-    return res.status(404).json(result);
-  }
+  return res.status(404).json(result);
 };
 
 module.exports = { aproveUsers };
