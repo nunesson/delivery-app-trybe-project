@@ -2,8 +2,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const chaiHttp = require('chai-http')
 const app = require('../api/app')
-const { users } = require('../database/models');
-const { newRegister, invalidRegister, token } = require('./mocks/users');
+const { newRegister, invalidRegister } = require('./mocks/users');
 
 chai.use(chaiHttp);
 

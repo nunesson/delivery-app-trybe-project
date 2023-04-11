@@ -32,22 +32,16 @@ const findById = async (id) => {
     return { type: 'error', message: 'Sale not found' };
   }
 
-  if (sale) {
-    return sale;
-  }
+  return sale;
 };
   const update = async (id, status) => {
-    const sale = await sales.update({ status }, { where: { id } });
-  console.log(sale);
-    if (!sale) {
+    const [sale] = await sales.update({ status }, { where: { id } });
+    if (sale === 0) {
       return { type: 'error', message: 'Sale not found' };
     }
     const saleUpdated = await findById(id);
-    console.log(saleUpdated);
   
-    if (sale) {
-      return saleUpdated.dataValues;
-    }
+    return saleUpdated.dataValues;
 };
 
 module.exports = { createSale, findAll, findById, update };

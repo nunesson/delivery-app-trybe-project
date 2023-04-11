@@ -7,13 +7,9 @@ const createSaleController = async (req, res) => {
   return res.status(201).json(result);
 };
 
-const findAll = async (req, res, next) => {
-  try {
-      const allSales = await saleService.findAll();
-      res.status(200).json(allSales);
-  } catch (err) {
-      next(err);
-  }
+const findAll = async (req, res) => {
+    const allSales = await saleService.findAll();
+    res.status(200).json(allSales);
 };
 
 const findOneSale = async (req, res) => {

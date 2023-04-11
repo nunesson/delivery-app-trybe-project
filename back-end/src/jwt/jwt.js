@@ -7,13 +7,7 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const generateToken = (payload) => {
-  try {
-    return jwt.sign(payload.dataValues, TOKEN_SECRET, jwtConfig);
-  } catch (error) {
-    throw new Error('Falha ao gerar token');
-  }
-};
+const generateToken = (payload) => jwt.sign(payload.dataValues, TOKEN_SECRET, jwtConfig);
 
 const decodeToken = (token) => {
   if (!token) {
