@@ -20,11 +20,17 @@ para expendir seu próspero negócio de venda de cerveja.
 
 Tecnologias usadas:
 Javascript
+
 React/Context API
+
 MySQL
+
 Sequelize
+
 Testes com RTL, Jest, Chai e Mocha
 
 Como testar:
+
 executar o comando ``npm install``
+
 executar o comando ``npm start``
