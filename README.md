@@ -3,9 +3,13 @@ Projeto de conclusão do módulo de Back-end da Trybe, feito em grupo.
 
 Membros do grupo:
 Anderson Nunes: https://github.com/nunesson
+
 João Matheus: https://github.com/Joao-Matheus-Franca
+
 Esdras Thiago: https://github.com/EsdrasThiago
+
 Leonardo Brindeiro: https://github.com/Leonardo-Brindeiro
+
 Vitor Teixeira: https://github.com/VitorBarrioni
 
 Objetivo do App:
