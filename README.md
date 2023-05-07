@@ -12,13 +12,14 @@ Leonardo Brindeiro: https://github.com/Leonardo-Brindeiro
 
 Vitor Teixeira: https://github.com/VitorBarrioni
 
-Objetivo do App:
+## Objetivo do App:
 
 Um app de delivery de bebidas para a nossa querida 
 Dona Tereza que precisava de um aplicativo confiável
 para expendir seu próspero negócio de venda de cerveja.
 
-Tecnologias usadas:
+## Tecnologias usadas:
+
 Javascript
 
 React/Context API
@@ -29,7 +30,7 @@ Sequelize
 
 Testes com RTL, Jest, Chai e Mocha
 
-Como testar:
+## Como testar:
 
 executar o comando ``npm install``
 
