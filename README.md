@@ -16,7 +16,7 @@ Vitor Teixeira: https://github.com/VitorBarrioni
 
 Um app de delivery de bebidas para a nossa querida 
 Dona Tereza que precisava de um aplicativo confiável
-para expendir seu próspero negócio de venda de cerveja.
+para expandir seu próspero negócio de venda de cerveja.
 
 ## Tecnologias usadas:
 
